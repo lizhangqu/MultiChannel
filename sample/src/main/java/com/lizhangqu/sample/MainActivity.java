@@ -65,20 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bos.write(data, 0, read);
             }
 
-            String s = new String(bos.toByteArray(), "UTF-8");
-            Log.e("TAG", "channel:" + s);
-            String content = new String(bos.toByteArray(), "ISO-8859-1");
-
-            byte[] buildNumStart = new byte[]{0x04, 0x03, 0x43, 0x4b};
-            byte[] buildNumEnd = new byte[]{0x06, 0x05, 0x43, 0x4b};
-
-            String startStr = new String(buildNumStart, "ISO-8859-1");
-            int startIndex = content.lastIndexOf(startStr);
-
-            String endStr = new String(buildNumEnd, "ISO-8859-1");
-            int endIndex = content.lastIndexOf(endStr);
-
-            return content.substring(startIndex + startStr.length(), endIndex);
+            String channel = new String(bos.toByteArray(), "UTF-8");
+            return channel;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
