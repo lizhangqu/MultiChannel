@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.1"
+    signingConfigs {
+        release {
+            keyAlias 'lizhangqu'
+            keyPassword 'lizhangqu'
+            storeFile file('./sign/release.jks')
+            storePassword 'lizhangqu'
+            v2SigningEnabled false
+        }
+    }
+    defaultConfig {
+        applicationId "com.lizhangqu.sample"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    dexOptions {
+        preDexLibraries true
+        threadCount 4
+        javaMaxHeapSize '2g'
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.1.0'
+
+}
+
+apply plugin: 'com.lizhangqu.multichannel'
+multiChannel {
+    channels = ["baidu", "qihu", "google", "huawei", "xiaomi", "wandoujia", "anzhi", "uc", "tencent", "wangyi", "youmeng"]
+}
