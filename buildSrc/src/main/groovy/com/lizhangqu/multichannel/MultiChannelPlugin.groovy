@@ -46,7 +46,8 @@ class MultiChannelPlugin implements Plugin<Project> {
                 def aaptFile = new File(aaptPath);
 
                 //got assemble Task
-                def assembleTask = project.tasks.findByName("assemble${variantName}")
+                def assembleTask = variant.getAssemble();
+//                def assembleTask = project.tasks.findByName("assemble${variantName}")
 
                 //got package Task
                 def packageTask = project.tasks.findByName("package${variantName}")
